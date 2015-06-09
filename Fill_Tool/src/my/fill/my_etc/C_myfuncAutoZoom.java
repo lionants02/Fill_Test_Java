@@ -21,14 +21,22 @@ public class C_myfuncAutoZoom extends C_myfunc{
 
     public BufferedImage my_fillMapsAuto(double lat, double longg) {
         C_myfunc_makeURL funcurl=new C_myfunc_makeURL();
+        //funcurl.setZoom(3);
         URL url=null;
         try {
+            System.out.println(funcurl.getUrlMaps(lat, longg));
             url=new URL(funcurl.getUrlMaps(lat, longg));
         } catch (MalformedURLException ex) {
             Logger.getLogger(C_myfuncAutoZoom.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        BufferedImage orgimg = my_fillMaps(url);
+        BufferedImage orgimg;
+        try {
+            orgimg = my_fillMaps(url);
+        } catch (java.awt.image.RasterFormatException e) {
+            funcurl.setZoom(2);
+            url=new URL(funcurl.getUrlMaps(lat, longg));
+        }
         double multiplexvalue=1;
         int height = orgimg.getHeight();
         int width = orgimg.getWidth();

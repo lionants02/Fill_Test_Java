@@ -26,7 +26,7 @@ public class Fill_Tool {
         // TODO code application logic here
         
         C_myfuncAutoZoom myfunczoom=new C_myfuncAutoZoom();
-        myfunczoom.my_fillMapsAuto(102.9288784, 16.4877914, "C:\\Users\\SSI\\Desktop\\max\\กรมที่ดิน\\ภาพแปล1.png");
+        myfunczoom.my_fillMapsAuto(102.8367144, 16.4301046, "C:\\Users\\SSI\\Desktop\\max\\กรมที่ดิน\\ภาพแปล1.png");
         
         /*C_myfunc func=new C_myfunc();
         C_myfunc_makeURL funcurl=new C_myfunc_makeURL();
