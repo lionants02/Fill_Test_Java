@@ -27,14 +27,16 @@ public class C_myfunc_makeURL {
         this.height = height;
         this.xlenge = xlenge;
         this.ylenge = ylenge;
-        xlenge_2=xlenge/2;
-        ylenge_2=ylenge/2;
+        calibate();
     }
     public C_myfunc_makeURL(){
+        calibate();
+    }
+    
+    private void calibate(){
         xlenge_2=xlenge/2;
         ylenge_2=ylenge/2;
     }
-    
     
     public String getUrlMaps(double x,double y){
         
@@ -47,9 +49,11 @@ public class C_myfunc_makeURL {
         out+="&HEIGHT="+height;
         return out;
     }
-    
-
-    
-    
+    public void setZoom(double Zoom){
+        Zoom=1/Zoom;
+        xlenge*=Zoom;
+        ylenge*=Zoom;
+        calibate();
+    }
     
 }

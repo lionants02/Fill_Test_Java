@@ -60,6 +60,7 @@ public class C_myfunc{
             return null;
         } 
     }
+        
     /**
      * รับเข้าและส่งออกเป็นไฟล์ png
      * @param file
