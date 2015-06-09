@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -33,6 +34,11 @@ public class C_myfunc{
         Image img=ImageIO.read(new File(filename));
         return img;        
     }
+    public static Image getImage1(URL filename) throws IOException{
+        //Image img=Toolkit.getDefaultToolkit().getImage(filename);
+        Image img=ImageIO.read(filename);
+        return img;        
+    }
     public static C_node_img getCenter(Image img){
         C_node_img highwidth=getHighWidth(img);
         return new C_node_img(highwidth.getX()/2, highwidth.getY()/2);
@@ -40,7 +46,11 @@ public class C_myfunc{
     public static C_node_img getHighWidth(Image img){
         return new C_node_img(img.getWidth(null), img.getHeight(null));
     }
-    
+    /**
+     * รับเข้าไฟล์ส่งออก BufferImage
+     * @param file
+     * @return 
+     */
     public BufferedImage my_fillMaps(String file){
         try {
             Image orgimg=getImage1(file);
@@ -50,6 +60,11 @@ public class C_myfunc{
             return null;
         } 
     }
+    /**
+     * รับเข้าและส่งออกเป็นไฟล์ png
+     * @param file
+     * @param output 
+     */
     public void my_fillMaps(String file,String output){
         try {
             Image orgimg=getImage1(file);
@@ -58,6 +73,28 @@ public class C_myfunc{
         } catch (IOException ex) {
             Logger.getLogger(C_myfunc.class.getName()).log(Level.SEVERE, null, ex);
         } 
+    }
+    public void my_fillMaps(URL url,String output){
+        try {
+            Image orgimg=getImage1(url);
+            BufferedImage img = my_fillCenter(orgimg,0x0000ff00);
+            writeImg(output, img);
+        } catch (IOException ex) {
+            Logger.getLogger(C_myfunc.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    public BufferedImage my_fillMaps(URL url){
+        try {
+            Image orgimg=getImage1(url);
+            BufferedImage img = my_fillCenter(orgimg,0x0000ff00);
+            return img;
+        } catch (IOException ex) {
+            Logger.getLogger(C_myfunc.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+    public BufferedImage my_fillMaps(BufferedImage orgimg){
+        return my_fillCenter(orgimg,0x0000ff00);
     }
     
     
@@ -73,26 +110,52 @@ public class C_myfunc{
         quele.my_setEmp();
         quele.my_add(center);
         C_node_img n=quele.my_next();
-        int xmin=0,xmax=0,ymin=0,ymax=0;
+        int xmin,xmax,ymin,ymax;
+        xmin=xmax=n.getX();
+        ymin=ymax=n.getY();
         //int rgb1=imgpaint.getRGB(n.getX(), n.getY());
         //int rgb2=imgorg.getRGB(n.getX(), n.getY());
         long i =0;
         color|=0xff000000;
+        int x,y;
         while(n!=null){
-            
-            if(checkColor(imgorg, imgpaint , 0, n.getX(), n.getY())){
+            x=n.getX();
+            y=n.getY();
+            if(checkColor(imgorg, imgpaint , 0, x,y )){
             i++;
-                imgpaint.setRGB(n.getX(), n.getY(), color);
+                imgpaint.setRGB(x, y, color);
                 //เพิ่มตำแหน่งสุดท้ายคิว
-                if(checkColor(imgorg, imgpaint , 0, n.getX(), n.getY()-1))quele.my_add(new C_node_img( n.getX(), n.getY()-1));
-                if(checkColor(imgorg, imgpaint , 0, n.getX()+1, n.getY()))quele.my_add(new C_node_img( n.getX()+1, n.getY()));
-                if(checkColor(imgorg, imgpaint , 0, n.getX(), n.getY()+1))quele.my_add(new C_node_img( n.getX(), n.getY()+1));
-                if(checkColor(imgorg, imgpaint , 0, n.getX()-1, n.getY()))quele.my_add(new C_node_img( n.getX()-1, n.getY()));
+                xmin=(x<xmin)?x:xmin;
+                xmax=(x>xmax)?x:xmax;
+                ymin=(y<ymin)?y:ymin;
+                ymax=(y>ymax)?y:ymax;
+                try{
+                if(checkColor(imgorg, imgpaint , 0, x, y-1))quele.my_add(new C_node_img( x, y-1));
+                }catch(Exception ex){
+                    
+                }
+                try{
+                if(checkColor(imgorg, imgpaint , 0, x+1, y))quele.my_add(new C_node_img( x+1, y));
+                }catch(Exception ex){
+                    
+                }
+                try{
+                if(checkColor(imgorg, imgpaint , 0, x, y+1))quele.my_add(new C_node_img( x, y+1));
+                }catch(Exception ex){
+                    
+                }
+                try{
+                if(checkColor(imgorg, imgpaint , 0, x-1, y))quele.my_add(new C_node_img( x-1, y));
+                }catch(Exception ex){
+                    
+                }
+                
             }
             n=quele.my_next();
             
         }
-        return imgpaint;
+        BufferedImage copout=imgpaint.getSubimage(xmin, ymin, xmax-xmin, ymax-ymin);
+        return copout;
     }
     
     private boolean checkColor(BufferedImage img1,BufferedImage img2,int target,int x,int y){
@@ -133,20 +196,5 @@ public class C_myfunc{
             Logger.getLogger(C_myfunc.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void applyGrayscaleMaskToAlpha(BufferedImage image, BufferedImage mask) {
-        int width = image.getWidth();
-        int height = image.getHeight();
 
-        int[] imagePixels = image.getRGB(0, 0, width, height, null, 0, width);
-        int[] maskPixels = mask.getRGB(0, 0, width, height, null, 0, width);
-
-        for (int i = 0; i < imagePixels.length; i++) {
-            int color = imagePixels[i] & 0x00ffffff; // Mask preexisting alpha
-            int alpha = maskPixels[i] << 24; // Shift green to alpha
-            imagePixels[i] = color | alpha;
-        }
-
-        image.setRGB(0, 0, width, height, imagePixels, 0, width);
-    }
 }
