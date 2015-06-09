@@ -5,7 +5,7 @@
     <client name="DolParcelAll">
       <wsdl-url>http://164.115.20.131/adxgateway/services/DolParcelAll?wsdl</wsdl-url>
       <local-wsdl-file>164.115.20.131/adxgateway/services/DolParcelAll.wsdl</local-wsdl-file>
-      <package-name>55.49.164.110.dolparcel2ega</package-name>
+      <package-name>_55._49._164._110.dolparcel2ega</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>

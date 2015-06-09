@@ -31,7 +31,7 @@
     </target>
     <target name="wsimport-client-clean-DolParcelAll" depends="-init-project">
         <delete dir="${build.generated.dir}/jax-wsCache/DolParcelAll"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/55/49/164/110/dolparcel2ega"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/_55/_49/_164/_110/dolparcel2ega"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-DolParcelAll"/>
 </project>
