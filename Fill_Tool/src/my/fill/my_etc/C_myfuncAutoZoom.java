@@ -20,12 +20,12 @@ public class C_myfuncAutoZoom extends C_myfunc{
     private int limit_height = 900;
 
     public BufferedImage my_fillMapsAuto(double lat, double longg) {
-        C_myfunc_makeURL funcurl=new C_myfunc_makeURL();
+        C_myfunc_makeURL funcurl = new C_myfunc_makeURL();
         //funcurl.setZoom(3);
-        URL url=null;
+        URL url = null;
         try {
             System.out.println(funcurl.getUrlMaps(lat, longg));
-            url=new URL(funcurl.getUrlMaps(lat, longg));
+            url = new URL(funcurl.getUrlMaps(lat, longg));
         } catch (MalformedURLException ex) {
             Logger.getLogger(C_myfuncAutoZoom.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -35,7 +35,22 @@ public class C_myfuncAutoZoom extends C_myfunc{
             orgimg = my_fillMaps(url);
         } catch (java.awt.image.RasterFormatException e) {
             funcurl.setZoom(2);
-            url=new URL(funcurl.getUrlMaps(lat, longg));
+            try {
+                url = new URL(funcurl.getUrlMaps(lat, longg));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(C_myfuncAutoZoom.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                orgimg = my_fillMaps(url);
+            } catch (java.awt.image.RasterFormatException ee) {
+                funcurl.setZoom(2);
+                try {
+                    url = new URL(funcurl.getUrlMaps(lat, longg));
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(C_myfuncAutoZoom.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                orgimg = my_fillMaps(url);
+            }
         }
         double multiplexvalue=1;
         int height = orgimg.getHeight();
