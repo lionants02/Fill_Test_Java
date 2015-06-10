@@ -31,6 +31,7 @@ public class C_myfuncAutoZoom extends C_myfunc{
             return null;
         }
         BufferedImage orgimg;
+        funcurl.setZoom(0.5);
         try {
             orgimg = my_fillMaps(url);
         } catch (java.awt.image.RasterFormatException e) {
