@@ -51,10 +51,10 @@ public class C_myfunc{
      * @param file
      * @return 
      */
-    public BufferedImage my_fillMaps(String file){
+    public BufferedImage my_fillMaps(String file,boolean crop){
         try {
             Image orgimg=getImage1(file);
-            return my_fillCenter(orgimg,0x0000ff00);
+            return my_fillCenter(orgimg,0x0000ff00,crop);
         } catch (IOException ex) {
             Logger.getLogger(C_myfunc.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -66,40 +66,40 @@ public class C_myfunc{
      * @param file
      * @param output 
      */
-    public void my_fillMaps(String file,String output){
+    public void my_fillMaps(String file,String output,boolean crop){
         try {
             Image orgimg=getImage1(file);
-            BufferedImage img = my_fillCenter(orgimg,0x0000ff00);
+            BufferedImage img = my_fillCenter(orgimg,0x0000ff00,crop);
             writeImg(output, img);
         } catch (IOException ex) {
             Logger.getLogger(C_myfunc.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-    public void my_fillMaps(URL url,String output){
+    public void my_fillMaps(URL url,String output,boolean crop){
         try {
             Image orgimg=getImage1(url);
-            BufferedImage img = my_fillCenter(orgimg,0x0000ff00);
+            BufferedImage img = my_fillCenter(orgimg,0x0000ff00,crop);
             writeImg(output, img);
         } catch (IOException ex) {
             Logger.getLogger(C_myfunc.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-    public BufferedImage my_fillMaps(URL url){
+    public BufferedImage my_fillMaps(URL url,boolean crop){
         try {
             Image orgimg=getImage1(url);
-            BufferedImage img = my_fillCenter(orgimg,0x0000ff00);
+            BufferedImage img = my_fillCenter(orgimg,0x0000ff00,crop);
             return img;
         } catch (IOException ex) {
             Logger.getLogger(C_myfunc.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } 
     }
-    public BufferedImage my_fillMaps(BufferedImage orgimg){
-        return my_fillCenter(orgimg,0x0000ff00);
+    public BufferedImage my_fillMaps(BufferedImage orgimg,boolean crop){
+        return my_fillCenter(orgimg,0x0000ff00,crop);
     }
     
     
-    public BufferedImage my_fillCenter(Image img,int color){
+    public BufferedImage my_fillCenter(Image img,int color,boolean crop){
         C_node_img highwidth=getHighWidth(img);
         C_node_img center =getCenter(img);
         C_node_queue quele=new C_node_queue();
@@ -152,11 +152,13 @@ public class C_myfunc{
                 }
                 
             }
-            n=quele.my_next();
-            
+            n = quele.my_next();
+
         }
-        BufferedImage copout=imgpaint.getSubimage(xmin, ymin, xmax-xmin, ymax-ymin);
-        return copout;
+        if (crop) {
+            BufferedImage copout = imgpaint.getSubimage(xmin, ymin, xmax - xmin, ymax - ymin);
+            return copout;
+        }else return imgpaint;
     }
     
     private boolean checkColor(BufferedImage img1,BufferedImage img2,int target,int x,int y){

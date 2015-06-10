@@ -32,7 +32,7 @@ public class C_myfuncAutoZoom extends C_myfunc{
         }
         BufferedImage orgimg;
         try {
-            orgimg = my_fillMaps(url);
+            orgimg = my_fillMaps(url,true);
         } catch (java.awt.image.RasterFormatException e) {
             funcurl.setZoom(2);
             try {
@@ -41,7 +41,7 @@ public class C_myfuncAutoZoom extends C_myfunc{
                 Logger.getLogger(C_myfuncAutoZoom.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                orgimg = my_fillMaps(url);
+                orgimg = my_fillMaps(url,true);
             } catch (java.awt.image.RasterFormatException ee) {
                 funcurl.setZoom(2);
                 try {
@@ -49,7 +49,7 @@ public class C_myfuncAutoZoom extends C_myfunc{
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(C_myfuncAutoZoom.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                orgimg = my_fillMaps(url);
+                orgimg = my_fillMaps(url,true);
             }
         }
         double multiplexvalue=1;
@@ -67,7 +67,7 @@ public class C_myfuncAutoZoom extends C_myfunc{
             Logger.getLogger(C_myfuncAutoZoom.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        return my_fillMaps(url);
+        return my_fillMaps(url,true);
     }
      public void my_fillMapsAuto(double lat, double longg,String output) {
         BufferedImage orgimg =   my_fillMapsAuto(lat, longg);

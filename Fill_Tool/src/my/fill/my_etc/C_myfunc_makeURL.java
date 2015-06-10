@@ -6,6 +6,8 @@
 package my.fill.my_etc;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -21,6 +23,8 @@ public class C_myfunc_makeURL {
     private double ylenge=0.0060707275365f;//14
     private double xlenge_2;
     private double ylenge_2;
+    
+    Map<String,Double> tempposition=null;
 
     public C_myfunc_makeURL(int width, int height, double xlenge, double ylenge) {
         this.width = width;
@@ -39,12 +43,20 @@ public class C_myfunc_makeURL {
     }
     
     public String getUrlMaps(double x,double y){
-        
+        tempposition=new HashMap<String,Double>();
+        double tempx=x-xlenge_2;
+        tempposition.put("xmin", tempx);
+        double tempy=y-ylenge_2;
+        tempposition.put("ymin", tempy);
+        double tempxx=x+xlenge_2;
+        tempposition.put("xmax", tempxx);
+        double tempyy=y+ylenge_2;
+        tempposition.put("ymax", tempyy);
         String out=((x<102)?head47:head48)+"BBOX=";
-        out+=x-xlenge_2+",";
-        out+=y-ylenge_2+",";
-        out+=x+xlenge_2+",";
-        out+=y+ylenge_2;
+        out+=tempx+",";
+        out+=tempy+",";
+        out+=tempxx+",";
+        out+=tempyy;
         out+="&WIDTH="+width;
         out+="&HEIGHT="+height;
         return out;
@@ -55,5 +67,11 @@ public class C_myfunc_makeURL {
         ylenge*=Zoom;
         calibate();
     }
-    
+    /**
+     * ต้องเรีกการทำงานหลัง getUrlMaps
+     * @return พิกัดตำสุดของกรอบ x
+     */
+    public Map<String,Double> getPositionBox(){
+        return tempposition;
+    }
 }
