@@ -5,7 +5,7 @@
     <client name="DolParcel">
       <wsdl-url>http://110.164.49.55/DOLPARCEL2EGA/DolParcel.svc?singleWsdl</wsdl-url>
       <local-wsdl-file>110.164.49.55/DOLPARCEL2EGA/DolParcel.svc.singlewsdl.wsdl</local-wsdl-file>
-      <package-name>55.49.164.110.dolparcel2ega</package-name>
+      <package-name>_55._49._164._110.dolparcel2ega</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
