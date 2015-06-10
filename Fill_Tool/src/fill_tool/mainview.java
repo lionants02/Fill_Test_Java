@@ -5,8 +5,9 @@
  */
 package fill_tool;
 
-import _55._49._164._110.dolparcel2ega.ArrayOfParcel;
 import _55._49._164._110.dolparcel2ega.Parcel;
+
+
 
 /**
  *
@@ -130,13 +131,15 @@ public class mainview extends javax.swing.JFrame {
             @Override
             public void run() {
                 try{
-                Parcel data = C_controller.getParcel(txt_provence.getText(), txt_amper.getText(), txt_ns4.getText()).getParcel().get(0);
+                //Parcel data = C_controller.getParcel(txt_provence.getText(), txt_amper.getText(), txt_ns4.getText()).getParcel().get(0);
+                    Parcel data = C_controller.getParcel(txt_provence.getText(), txt_amper.getText(), txt_ns4.getText(), null, null).getParcel().get(0);
+                    String[] raiwa=C_controller.getAreaByPARCELNO(Integer.parseInt(txt_provence.getText()), Integer.parseInt(txt_amper.getText()), Integer.parseInt(txt_ns4.getText())).split("-");
                 //txt_out.setText("");
                 String out = "";
                 out += data.getLANDOFFICENAME().getValue();
                 out += "\nlat=" + data.getMAPX();
                 out += "\nlong=" + data.getMAPY();
-                out += "\nArea Rai:" + data.getAreaRai() + " Nang:" + data.getAreaNang() + " Wa:" + data.getAreaWa();
+                out += "\nArea Rai:" + raiwa[0] + " Nang:" + raiwa[1] + " Wa:" + raiwa[2];
                 txt_out.setText(out);
                 }catch(Exception e){
                     System.err.println(e);

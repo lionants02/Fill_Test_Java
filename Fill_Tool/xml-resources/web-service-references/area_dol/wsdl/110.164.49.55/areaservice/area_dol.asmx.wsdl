@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="getAreaByLandNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UTM1" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UTM2" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UTM3" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UTM4" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UTMSCALE" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="LAND_NO" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAreaByLandNoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getAreaByLandNoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAreaByPARCEL_NO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Province_ID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="AUMPHUR_ID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PARCEL_NO" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAreaByPARCEL_NOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getAreaByPARCEL_NOResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getAreaByLandNoSoapIn">
+    <wsdl:part name="parameters" element="tns:getAreaByLandNo" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByLandNoSoapOut">
+    <wsdl:part name="parameters" element="tns:getAreaByLandNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByPARCEL_NOSoapIn">
+    <wsdl:part name="parameters" element="tns:getAreaByPARCEL_NO" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByPARCEL_NOSoapOut">
+    <wsdl:part name="parameters" element="tns:getAreaByPARCEL_NOResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByLandNoHttpGetIn">
+    <wsdl:part name="UTM1" type="s:string" />
+    <wsdl:part name="UTM2" type="s:string" />
+    <wsdl:part name="UTM3" type="s:string" />
+    <wsdl:part name="UTM4" type="s:string" />
+    <wsdl:part name="UTMSCALE" type="s:string" />
+    <wsdl:part name="LAND_NO" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByLandNoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByPARCEL_NOHttpGetIn">
+    <wsdl:part name="Province_ID" type="s:string" />
+    <wsdl:part name="AUMPHUR_ID" type="s:string" />
+    <wsdl:part name="PARCEL_NO" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByPARCEL_NOHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByLandNoHttpPostIn">
+    <wsdl:part name="UTM1" type="s:string" />
+    <wsdl:part name="UTM2" type="s:string" />
+    <wsdl:part name="UTM3" type="s:string" />
+    <wsdl:part name="UTM4" type="s:string" />
+    <wsdl:part name="UTMSCALE" type="s:string" />
+    <wsdl:part name="LAND_NO" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByLandNoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByPARCEL_NOHttpPostIn">
+    <wsdl:part name="Province_ID" type="s:string" />
+    <wsdl:part name="AUMPHUR_ID" type="s:string" />
+    <wsdl:part name="PARCEL_NO" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getAreaByPARCEL_NOHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="AREA_DOLSoap">
+    <wsdl:operation name="getAreaByLandNo">
+      <wsdl:input message="tns:getAreaByLandNoSoapIn" />
+      <wsdl:output message="tns:getAreaByLandNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAreaByPARCEL_NO">
+      <wsdl:input message="tns:getAreaByPARCEL_NOSoapIn" />
+      <wsdl:output message="tns:getAreaByPARCEL_NOSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AREA_DOLHttpGet">
+    <wsdl:operation name="getAreaByLandNo">
+      <wsdl:input message="tns:getAreaByLandNoHttpGetIn" />
+      <wsdl:output message="tns:getAreaByLandNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAreaByPARCEL_NO">
+      <wsdl:input message="tns:getAreaByPARCEL_NOHttpGetIn" />
+      <wsdl:output message="tns:getAreaByPARCEL_NOHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AREA_DOLHttpPost">
+    <wsdl:operation name="getAreaByLandNo">
+      <wsdl:input message="tns:getAreaByLandNoHttpPostIn" />
+      <wsdl:output message="tns:getAreaByLandNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAreaByPARCEL_NO">
+      <wsdl:input message="tns:getAreaByPARCEL_NOHttpPostIn" />
+      <wsdl:output message="tns:getAreaByPARCEL_NOHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AREA_DOLSoap" type="tns:AREA_DOLSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getAreaByLandNo">
+      <soap:operation soapAction="http://tempuri.org/getAreaByLandNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAreaByPARCEL_NO">
+      <soap:operation soapAction="http://tempuri.org/getAreaByPARCEL_NO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AREA_DOLSoap12" type="tns:AREA_DOLSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getAreaByLandNo">
+      <soap12:operation soapAction="http://tempuri.org/getAreaByLandNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAreaByPARCEL_NO">
+      <soap12:operation soapAction="http://tempuri.org/getAreaByPARCEL_NO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AREA_DOLHttpGet" type="tns:AREA_DOLHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="getAreaByLandNo">
+      <http:operation location="/getAreaByLandNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAreaByPARCEL_NO">
+      <http:operation location="/getAreaByPARCEL_NO" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AREA_DOLHttpPost" type="tns:AREA_DOLHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getAreaByLandNo">
+      <http:operation location="/getAreaByLandNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAreaByPARCEL_NO">
+      <http:operation location="/getAreaByPARCEL_NO" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AREA_DOL">
+    <wsdl:port name="AREA_DOLSoap" binding="tns:AREA_DOLSoap">
+      <soap:address location="http://110.164.49.55/areaservice/area_dol.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AREA_DOLSoap12" binding="tns:AREA_DOLSoap12">
+      <soap12:address location="http://110.164.49.55/areaservice/area_dol.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AREA_DOLHttpGet" binding="tns:AREA_DOLHttpGet">
+      <http:address location="http://110.164.49.55/areaservice/area_dol.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AREA_DOLHttpPost" binding="tns:AREA_DOLHttpPost">
+      <http:address location="http://110.164.49.55/areaservice/area_dol.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

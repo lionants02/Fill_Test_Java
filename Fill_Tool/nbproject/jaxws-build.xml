@@ -16,22 +16,39 @@
             <classpath path="${libs.jaxws21.classpath}"/>
         </taskdef>
     </target>
-    <target name="wsimport-client-DolParcelAll" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/DolParcelAll"/>
-        <property name="wsdl-DolParcelAll" location="xml-resources/web-service-references/DolParcelAll/wsdl/164.115.20.131/adxgateway/services/DolParcelAll.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/DolParcelAll" destdir="${build.generated.dir}/jax-wsCache/DolParcelAll" wsdl="${wsdl-DolParcelAll}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://164.115.20.131/adxgateway/services/DolParcelAll?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${wsdl-DolParcelAll}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/DolParcelAll"/>
+    <target name="wsimport-client-DolParcel" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/DolParcel"/>
+        <property name="wsdl-DolParcel" location="xml-resources/web-service-references/DolParcel/wsdl/110.164.49.55/DOLPARCEL2EGA/DolParcel.svc.singlewsdl.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/DolParcel" destdir="${build.generated.dir}/jax-wsCache/DolParcel" wsdl="${wsdl-DolParcel}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://110.164.49.55/DOLPARCEL2EGA/DolParcel.svc?singleWsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-DolParcel}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/DolParcel"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/DolParcelAll">
+            <fileset dir="${build.generated.dir}/jax-wsCache/DolParcel">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-DolParcelAll" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/DolParcelAll"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/_55/_49/_164/_110/dolparcel2ega"/>
+    <target name="wsimport-client-clean-DolParcel" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/DolParcel"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/55/49/164/110/dolparcel2ega"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-DolParcelAll"/>
+    <target name="wsimport-client-area_dol" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/area_dol"/>
+        <property name="wsdl-area_dol" location="xml-resources/web-service-references/area_dol/wsdl/110.164.49.55/areaservice/area_dol.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/area_dol" destdir="${build.generated.dir}/jax-wsCache/area_dol" wsdl="${wsdl-area_dol}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://110.164.49.55/areaservice/area_dol.asmx?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-area_dol}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/area_dol"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/area_dol">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-area_dol" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/area_dol"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/tempuri"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-DolParcel, wsimport-client-area_dol"/>
 </project>
