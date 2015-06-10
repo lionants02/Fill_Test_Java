@@ -6,6 +6,10 @@
 package fill_tool;
 
 import _55._49._164._110.dolparcel2ega.Parcel;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import my.fill.my_etc.C_myfuncAutoZoom;
 
 
 
@@ -32,7 +36,7 @@ public class mainview extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        ico_view = new javax.swing.JLabel();
         txt_provence = new javax.swing.JTextField();
         txt_amper = new javax.swing.JTextField();
         txt_ns4 = new javax.swing.JTextField();
@@ -70,7 +74,7 @@ public class mainview extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                        .addComponent(ico_view, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -116,7 +120,7 @@ public class mainview extends javax.swing.JFrame {
                         .addComponent(b_submit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ico_view, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -130,25 +134,37 @@ public class mainview extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                try{
-                //Parcel data = C_controller.getParcel(txt_provence.getText(), txt_amper.getText(), txt_ns4.getText()).getParcel().get(0);
+                try {
+                    //Parcel data = C_controller.getParcel(txt_provence.getText(), txt_amper.getText(), txt_ns4.getText()).getParcel().get(0);
                     Parcel data = C_controller.getParcel(txt_provence.getText(), txt_amper.getText(), txt_ns4.getText(), null, null).getParcel().get(0);
-                    String[] raiwa=C_controller.getAreaByPARCELNO(Integer.parseInt(txt_provence.getText()), Integer.parseInt(txt_amper.getText()), Integer.parseInt(txt_ns4.getText())).split("-");
-                //txt_out.setText("");
-                String out = "";
-                out += data.getLANDOFFICENAME().getValue();
-                out += "\nlat=" + data.getMAPX();
-                out += "\nlong=" + data.getMAPY();
-                out += "\nArea Rai:" + raiwa[0] + " Nang:" + raiwa[1] + " Wa:" + raiwa[2];
-                txt_out.setText(out);
-                }catch(Exception e){
+                    String[] raiwa = C_controller.getAreaByPARCELNO(Integer.parseInt(txt_provence.getText()), Integer.parseInt(txt_amper.getText()), Integer.parseInt(txt_ns4.getText())).split("-");
+                    //txt_out.setText("");
+                    String out = "";
+                    out += data.getLANDOFFICENAME().getValue();
+                    out += "\nlat=" + data.getMAPX();
+                    out += "\nlong=" + data.getMAPY();
+                    out += "\nArea Rai:" + raiwa[0] + " Nang:" + raiwa[1] + " Wa:" + raiwa[2];
+                    txt_out.setText(out);
+
+                    C_myfuncAutoZoom myfunczoom = new C_myfuncAutoZoom();
+                    BufferedImage img = myfunczoom.my_fillMapsAuto(data.getMAPY(), data.getMAPX());
+                    ImageIcon icon = new ImageIcon(img);
+                    
+                    
+
+                    //Dimension sizeimg = new Dimension(128, 128);
+                    //ico_view.setMinimumSize(sizeimg);
+                    //ico_view.setPreferredSize(sizeimg);
+                    //ico_view.setMaximumSize(sizeimg);
+
+                    ico_view.setIcon(icon);
+
+                } catch (Exception e) {
                     System.err.println(e);
-                }finally{
+                } finally {
                     b_submit.setEnabled(true);
                 }
-                
-               
-                
+
             }
         }).start();
 
@@ -191,7 +207,7 @@ public class mainview extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_submit;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel ico_view;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

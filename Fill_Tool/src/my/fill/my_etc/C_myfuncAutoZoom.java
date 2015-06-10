@@ -16,8 +16,8 @@ import java.util.logging.Logger;
  * @author SSI
  */
 public class C_myfuncAutoZoom extends C_myfunc{
-    private int limit_width = 900;
-    private int limit_height = 900;
+    private int limit_width = 400;
+    private int limit_height = 400;
 
     public BufferedImage my_fillMapsAuto(double lat, double longg) {
         C_myfunc_makeURL funcurl = new C_myfunc_makeURL();
